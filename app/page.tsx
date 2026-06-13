@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Suspense } from "react";
 import { BottomNav } from "@/components/navigation/bottom-nav";
 import { Sidebar } from "@/components/navigation/sidebar";
@@ -7,7 +8,9 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Course } from "@/lib/supabase/types";
 
 async function DashboardContent() {
-  const supabase = await createSupabaseServerClient();
+  const { createSupabaseServerClient } = await import("@/lib/supabase/server");
+
+  const supabase = createSupabaseServerClient();
 
   const { data, error } = await supabase
     .from("courses")
